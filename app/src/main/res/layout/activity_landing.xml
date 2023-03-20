@@ -18,7 +18,8 @@
         android:maxHeight="400dp"
         android:maxWidth="400dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp"
+        android:contentDescription="girl walking"/>
     <TextView
         android:id="@+id/text_heading"
         android:layout_width="wrap_content"
@@ -27,8 +28,9 @@
         android:text="Mood tracking made easy"
         android:textColor="@color/black"
         android:fontWeight="800"
+        android:textFontWeight="800"
         android:textStyle="bold"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         />
@@ -39,7 +41,7 @@
         android:fontFamily="@font/lato"
         android:text="Take charge of your mental well-being with VibeSense Get valuable insights and improve your mood, one day at a time."
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="15sp"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:lineSpacingMultiplier="0"
@@ -50,7 +52,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
@@ -65,12 +67,11 @@
         android:text="Login"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:background="@drawable/buttonshape2"
-
         android:textAlignment="center"/>
 
 
