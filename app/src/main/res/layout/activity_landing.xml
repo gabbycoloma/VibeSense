@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+
+
+    <ImageView
+        android:id="@+id/img_landing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_landing"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:maxHeight="400dp"
+        android:maxWidth="400dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="30dp"/>
+    <TextView
+        android:id="@+id/text_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:text="Mood tracking made easy"
+        android:textColor="@color/black"
+        android:fontWeight="800"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/text_paragraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:text="Take charge of your mental well-being with VibeSense Get valuable insights and improve your mood, one day at a time."
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:lineSpacingMultiplier="0"
+        android:lineSpacingExtra="35sp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="25dp"
+        android:layout_marginBottom="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_register"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttonshape"
+        android:text="Register"
+        android:textAlignment="center"
+        android:textColor="@color/primary"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttonshape2"
+
+        android:textAlignment="center"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
