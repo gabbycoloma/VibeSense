@@ -10,4 +10,6 @@
     <color name="primary">#AD7BE9</color>
     <color name="secondary">#3E54AC</color>
     <color name="background_color">#EEEEEE</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color">#AD7BE9</color>
 </resources>
