@@ -1,5 +1,6 @@
 package com.s12.mobdeve.coloma.caballero.vibesense
 
+import Quotes
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity

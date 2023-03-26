@@ -1,10 +1,17 @@
-package com.s12.mobdeve.coloma.caballero.vibesense
-
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import com.s12.mobdeve.coloma.caballero.vibesense.ZenQuotesService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,21 +28,44 @@ class Quotes : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // Declare the binding property
+    private lateinit var binding: FragmentQuotesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quotes, container, false)
+        // Inflate the layout using data binding
+        binding = FragmentQuotesBinding.inflate(inflater)
+        // Return the root view of the binding object
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://zenquotes.io/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(ZenQuotesService::class.java)
+
+        lifecycleScope.launch {
+            try {
+                val quotes = service.getRandomQuote()
+                val randomQuote = quotes.random()
+                withContext(Dispatchers.Main) {
+                    // Update the text view using the binding object
+                    binding.tvQuote.text = randomQuote.q
+                    binding.tvAuthor.text = randomQuote.a
+                }
+            } catch (e: Exception) {
+                // Handle any errors that may occur
+                Log.e("QuotesFragment", "Error getting quote: ${e.message}")
+            }
+        }
+    }
+
 
     companion object {
         /**

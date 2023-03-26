@@ -6,13 +6,56 @@
     tools:context=".Quotes"
     android:background="#EEEEEE">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Quotes Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="80dp"
+        android:background="@drawable/customborder"
+        android:clipToPadding="false"
+        android:elevation="4dp"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/quoteDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="March 26"
+            android:textColor="@color/secondary"
+            android:textSize="26dp"
+            android:fontFamily="@font/lato"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Generating quote..."
+            android:fontWeight="500"
+            android:textFontWeight="500"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center"
+            android:text="Author"
+            android:textColor="#7C7C7C"
+            android:fontFamily="@font/lato"
+            android:fontWeight="500"
+            android:textFontWeight="500"
+            android:textSize="16dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>
