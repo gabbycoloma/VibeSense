@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
