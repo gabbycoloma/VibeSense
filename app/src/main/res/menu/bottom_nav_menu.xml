@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miHome"
+        android:title="Home"
+        android:icon="@drawable/baseline_event_note_24"
+    />
+    <item
+        android:id="@+id/miAnalytics"
+        android:title="Analytics"
+        android:icon="@drawable/baseline_bar_chart_24"
+        />
+    <item
+        android:id="@+id/miAdd"
+        android:icon="@drawable/baseline_add_24"
+        android:title="Add"
+        />
+    <item
+        android:id="@+id/miQuotes"
+        android:title="Quotes"
+        android:icon="@drawable/baseline_format_quote_24"
+        />
+    <item
+        android:id="@+id/miMore"
+        android:title="More"
+        android:icon="@drawable/baseline_more_horiz_24"
+        />
+</menu>
