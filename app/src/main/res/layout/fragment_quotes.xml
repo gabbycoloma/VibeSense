@@ -16,17 +16,43 @@
         android:elevation="4dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/quoteDate"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:gravity="center_horizontal"
-            android:text="March 26"
-            android:textColor="@color/secondary"
-            android:textSize="26dp"
-            android:fontFamily="@font/lato"
-            android:textStyle="bold"/>
+            android:gravity="center_vertical|end"
+            >
+            <TextView
+                android:id="@+id/filler"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="Text-to-speech"
+                android:padding="8dp"
+/>
+            <TextView
+                android:id="@+id/quoteDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Date"
+                android:textColor="@color/secondary"
+                android:textSize="26dp"
+                android:fontFamily="@font/lato"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/ttsButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center|end"
+                android:gravity="center"
+                android:background="@drawable/custom_button"
+                android:contentDescription="Text-to-speech"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvQuote"
@@ -58,4 +84,5 @@
             android:textStyle="bold"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </FrameLayout>

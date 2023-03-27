@@ -1,10 +1,18 @@
+import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
+import com.s12.mobdeve.coloma.caballero.vibesense.Quote
 import com.s12.mobdeve.coloma.caballero.vibesense.ZenQuotesService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,37 +20,94 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Quotes.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Quotes : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    // Declare the binding property
     private lateinit var binding: FragmentQuotesBinding
+    private var randomQuote: Quote? = null
+    private var currentDate: String? = null
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var textToSpeech: TextToSpeech
+    private lateinit var scaleAnimation: Animation
+    private lateinit var alphaAnimation: Animation
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout using data binding
         binding = FragmentQuotesBinding.inflate(inflater)
-        // Return the root view of the binding object
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+
+        // Create the animations
+        scaleAnimation = ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        scaleAnimation.duration = 200
+        alphaAnimation = AlphaAnimation(1f, 0.5f)
+        alphaAnimation.duration = 200
+
+        // Get the last displayed quote date from SharedPreferences
+        val lastDisplayedDate = sharedPreferences.getString("lastDisplayedDate", "")
+
+        // Get the current date
+        currentDate = SimpleDateFormat("MMMM d, yyyy").format(Date())
+
+        // If the last displayed date does not match the current date, fetch a new quote
+        if (lastDisplayedDate != currentDate) {
+            fetchNewQuote()
+        } else {
+            // Otherwise, display the quote from SharedPreferences
+            val quoteText = sharedPreferences.getString("quoteText", "")
+            val authorText = sharedPreferences.getString("authorText", "")
+            binding.tvQuote.text = quoteText
+            binding.tvAuthor.text = authorText
+            binding.quoteDate.text = currentDate
+        }
+
+        // Initialize the TextToSpeech object
+        textToSpeech = TextToSpeech(requireContext()) { status ->
+            if (status != TextToSpeech.ERROR) {
+                // Set the language of the TextToSpeech object
+                textToSpeech.language = Locale.US
+            } else {
+                Log.e("QuotesFragment", "Error initializing TextToSpeech")
+            }
+        }
+
+        binding.ttsButton.setOnClickListener {
+            binding.ttsButton.isSelected = !binding.ttsButton.isSelected
+            if (binding.ttsButton.isSelected) {
+                binding.ttsButton.alpha = 1.0f
+                ObjectAnimator.ofFloat(binding.ttsButton, "scaleX", 1.0f, 1.2f, 1.0f).apply {
+                    duration = 200
+                    start()
+                }
+                ObjectAnimator.ofFloat(binding.ttsButton, "scaleY", 1.0f, 1.2f, 1.0f).apply {
+                    duration = 200
+                    start()
+                }
+            } else {
+                binding.ttsButton.alpha = 0.5f
+            }
+            val quoteText = sharedPreferences.getString("quoteText", "")
+            textToSpeech.speak(quoteText, TextToSpeech.QUEUE_FLUSH, null, null)
+
+        }
+    }
+    override fun onDestroyView() {
+        // Release the TextToSpeech object when the fragment is destroyed
+        textToSpeech.stop()
+        textToSpeech.shutdown()
+        super.onDestroyView()
+    }
+    private fun fetchNewQuote() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://zenquotes.io/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -53,37 +118,37 @@ class Quotes : Fragment() {
         lifecycleScope.launch {
             try {
                 val quotes = service.getRandomQuote()
-                val randomQuote = quotes.random()
-                withContext(Dispatchers.Main) {
-                    // Update the text view using the binding object
-                    binding.tvQuote.text = randomQuote.q
-                    binding.tvAuthor.text = randomQuote.a
+                randomQuote = quotes.random()
+                updateQuoteViews()
+                // Store the new quote and current date in SharedPreferences
+                with(sharedPreferences.edit()) {
+                    putString("quoteText", randomQuote?.q)
+                    putString("authorText", randomQuote?.a)
+                    putString("lastDisplayedDate", currentDate)
+                    apply()
                 }
             } catch (e: Exception) {
-                // Handle any errors that may occur
                 Log.e("QuotesFragment", "Error getting quote: ${e.message}")
             }
         }
     }
 
+    private fun updateQuoteViews() {
+        binding.tvQuote.text = randomQuote?.q ?: ""
+        binding.tvAuthor.text = randomQuote?.a ?: ""
+        binding.quoteDate.text = currentDate
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Update the date in case it has changed since the fragment was last shown
+        currentDate?.let {
+            binding.quoteDate.text = it
+        }
+    }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Quotes.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Quotes().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = Quotes()
     }
 }
