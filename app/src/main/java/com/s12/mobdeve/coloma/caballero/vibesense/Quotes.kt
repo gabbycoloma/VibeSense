@@ -1,3 +1,4 @@
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
 import com.s12.mobdeve.coloma.caballero.vibesense.Quote
 import com.s12.mobdeve.coloma.caballero.vibesense.ZenQuotesService
@@ -26,6 +30,8 @@ class Quotes : Fragment() {
     private var currentDate: String? = null
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var textToSpeech: TextToSpeech
+    private lateinit var scaleAnimation: Animation
+    private lateinit var alphaAnimation: Animation
 
 
     override fun onCreateView(
@@ -40,6 +46,12 @@ class Quotes : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+
+        // Create the animations
+        scaleAnimation = ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        scaleAnimation.duration = 200
+        alphaAnimation = AlphaAnimation(1f, 0.5f)
+        alphaAnimation.duration = 200
 
         // Get the last displayed quote date from SharedPreferences
         val lastDisplayedDate = sharedPreferences.getString("lastDisplayedDate", "")
@@ -70,8 +82,23 @@ class Quotes : Fragment() {
         }
 
         binding.ttsButton.setOnClickListener {
+            binding.ttsButton.isSelected = !binding.ttsButton.isSelected
+            if (binding.ttsButton.isSelected) {
+                binding.ttsButton.alpha = 1.0f
+                ObjectAnimator.ofFloat(binding.ttsButton, "scaleX", 1.0f, 1.2f, 1.0f).apply {
+                    duration = 200
+                    start()
+                }
+                ObjectAnimator.ofFloat(binding.ttsButton, "scaleY", 1.0f, 1.2f, 1.0f).apply {
+                    duration = 200
+                    start()
+                }
+            } else {
+                binding.ttsButton.alpha = 0.5f
+            }
             val quoteText = sharedPreferences.getString("quoteText", "")
             textToSpeech.speak(quoteText, TextToSpeech.QUEUE_FLUSH, null, null)
+
         }
     }
     override fun onDestroyView() {
