@@ -15,6 +15,7 @@ class MainAdapter(private val Mood:ArrayList<Mood>)
         val moodEmoji : ImageView = moodView.findViewById(R.id.mood_emoji)
         val moodName : TextView = moodView.findViewById(R.id.mood_name)
         val moodDesc : TextView = moodView.findViewById(R.id.mood_desc)
+        val moodDate: TextView = moodView.findViewById(R.id.mood_date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,5 +32,6 @@ class MainAdapter(private val Mood:ArrayList<Mood>)
         holder.moodEmoji.setImageResource(mood.emoji)
         holder.moodName.text = mood.name
         holder.moodDesc.text = mood.desc
+        holder.moodDate.text = mood.date
     }
 }
