@@ -33,5 +33,7 @@ class MainAdapter(private val Mood:ArrayList<Mood>)
         holder.moodName.text = mood.name
         holder.moodDesc.text = mood.desc
         holder.moodDate.text = mood.date
+
+        holder.itemView
     }
 }
