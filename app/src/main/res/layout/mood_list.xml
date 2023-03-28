@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@id/mood_name"
             app:layout_constraintStart_toEndOf="@id/mood_emoji"/>
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/mood_date"
             android:layout_width="90dp"
             android:layout_height="18dp"
             android:textAlignment="textEnd"
