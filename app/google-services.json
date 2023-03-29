@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19568447902",
+    "project_id": "vibesense-9523f",
+    "storage_bucket": "vibesense-9523f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19568447902:android:ae8abc58bc88339329868f",
+        "android_client_info": {
+          "package_name": "com.s12.mobdeve.coloma.caballero.vibesense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19568447902-o88anu5d7nv3sshq269m1svcjth20qct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEayyY2a11EGPROz80NRyRkuuHUPqt2Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19568447902-o88anu5d7nv3sshq269m1svcjth20qct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
