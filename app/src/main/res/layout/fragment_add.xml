@@ -6,7 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Add"
     android:background="#EEEEEE">
-    
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/moodDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:text="LOG IN"
+            android:textColor="@color/black"
+            android:fontWeight="800"
+            android:textFontWeight="800"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
