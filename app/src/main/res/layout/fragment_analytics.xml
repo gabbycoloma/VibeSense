@@ -1,18 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Analytics"
     android:background="#EEEEEE">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Analytics Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/customborder"
+        android:clipToPadding="false"
+        android:elevation="4dp"
+        android:padding="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/mood_emoji5"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:contentDescription="Emoji of mood"
+                android:src="@drawable/mood1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/mood5_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="10"
+                app:layout_constraintTop_toBottomOf="@id/mood_emoji5"
+                app:layout_constraintStart_toStartOf="@id/mood_emoji5"
+                app:layout_constraintEnd_toEndOf="@id/mood_emoji5"/>
+            <ImageView
+                android:id="@+id/mood_emoji4"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:contentDescription="Emoji of mood"
+                android:src="@drawable/mood2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/mood_emoji5"
+                app:layout_constraintRight_toLeftOf="@id/mood_emoji3"/>
+            <TextView
+                android:id="@+id/mood4_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="10"
+                app:layout_constraintTop_toBottomOf="@id/mood_emoji4"
+                app:layout_constraintStart_toStartOf="@id/mood_emoji4"
+                app:layout_constraintEnd_toEndOf="@id/mood_emoji4"/>
+            <ImageView
+                android:id="@+id/mood_emoji3"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:contentDescription="Emoji of mood"
+                android:src="@drawable/mood3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/mood_emoji4"
+                app:layout_constraintRight_toLeftOf="@id/mood_emoji2"/>
+            <TextView
+                android:id="@+id/mood3_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="10"
+                app:layout_constraintTop_toBottomOf="@id/mood_emoji3"
+                app:layout_constraintStart_toStartOf="@id/mood_emoji3"
+                app:layout_constraintEnd_toEndOf="@id/mood_emoji3"/>
+            <ImageView
+                android:id="@+id/mood_emoji2"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:contentDescription="Emoji of mood"
+                android:src="@drawable/mood4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/mood_emoji3"
+                app:layout_constraintRight_toLeftOf="@id/mood_emoji1"/>
+            <TextView
+                android:id="@+id/mood2_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="10"
+                app:layout_constraintTop_toBottomOf="@id/mood_emoji2"
+                app:layout_constraintStart_toStartOf="@id/mood_emoji2"
+                app:layout_constraintEnd_toEndOf="@id/mood_emoji2"/>
+            <ImageView
+                android:id="@+id/mood_emoji1"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
+                android:contentDescription="Emoji of mood"
+                android:src="@drawable/mood5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+            <TextView
+                android:id="@+id/mood1_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="10"
+                app:layout_constraintTop_toBottomOf="@id/mood_emoji1"
+                app:layout_constraintStart_toStartOf="@id/mood_emoji1"
+                app:layout_constraintEnd_toEndOf="@id/mood_emoji1"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </FrameLayout>
