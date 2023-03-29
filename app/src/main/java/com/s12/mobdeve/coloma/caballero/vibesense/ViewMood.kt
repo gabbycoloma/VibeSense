@@ -5,6 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.databinding.DataBindingUtil
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentMoreBinding
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentViewMoodBinding
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -16,40 +23,63 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ViewMood : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentViewMoodBinding
+    private var emoji: Int? = null
+    private var name: String? = null
+    private var description: String? = null
+    private var date: String? = null
+
+    companion object{
+        const val emojiKey : String = "EMOJI_KEY"
+        const val nameKey : String = "NAME_KEY"
+        const val descriptionKey : String = "DESCRIPTION_KEY"
+        const val dateKey : String = "DATE_KEY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            emoji = it.getInt(emojiKey) // Get the Int value
+            name = it.getString(nameKey)
+            description = it.getString(descriptionKey)
+            date = it.getString(dateKey)
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                replaceFragment(Home())
+            }
+        })
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentViewMoodBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Set the emoji, name, description, and date in the UI
+        binding.moodEmoji.setImageResource(emoji!!) // Convert the Int value to an Int resource ID
+        binding.moodName.text = name
+        binding.moodDesc.text = description
+        binding.moodDate.text = date
+
+        binding.btnBack.setOnClickListener{
+            replaceFragment(Home())
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_mood, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ViewMood.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                ViewMood().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    private fun replaceFragment(fragment : Fragment){
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.commit()
     }
 }
+
+
