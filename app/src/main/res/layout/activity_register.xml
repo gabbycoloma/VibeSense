@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
+    android:background="@color/white"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
 
@@ -43,6 +44,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/black"
         android:hint="First Name"
         app:boxStrokeColor="@color/primary"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -56,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
+            android:textColor="@color/black"
             android:inputType="textPersonName" />
 
 
@@ -68,6 +71,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/black"
         android:hint="Last Name"
         app:boxStrokeColor="@color/primary"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -81,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
             android:fontFamily="@font/lato" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +98,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
+        android:textColorHint="@color/black"
         android:hint="Email Address"
         app:boxStrokeColor="@color/primary"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -106,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:textColor="@color/black"
             android:fontFamily="@font/lato" />
 
 
@@ -120,6 +127,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="40dp"
+        android:textColorHint="@color/black"
         android:hint="Password"
         app:boxStrokeColor="@color/primary"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -133,6 +141,7 @@
             android:id="@+id/txt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:fontFamily="@font/lato"/>
 
 
