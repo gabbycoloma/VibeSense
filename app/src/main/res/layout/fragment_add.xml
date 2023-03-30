@@ -74,43 +74,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="14dp"
+            android:orientation="horizontal"
             android:gravity="center"
             >
-            <ImageView
-                android:id="@+id/moodHappy"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/mood1"
-                android:layout_marginHorizontal="8dp"
-                />
-            <ImageView
-                android:id="@+id/moodGood"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/mood2"
-                />
-            <ImageView
-                android:id="@+id/moodNeutral"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/mood3"
-                />
-            <ImageView
-                android:id="@+id/moodSad"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/mood4"
-                />
-            <ImageView
-                android:id="@+id/moodAngry"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/mood5"
-                />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/moodHappy"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:button="@color/transparent"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_mood1_selector"
+                    />
+                <RadioButton
+                    android:id="@+id/moodGood"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:button="@color/transparent"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_mood2_selector"
+                    />
+                <RadioButton
+                    android:id="@+id/moodNeutral"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:button="@color/transparent"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_mood3_selector"
+
+                    />
+                <RadioButton
+                    android:id="@+id/moodSad"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:button="@color/transparent"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_mood4_selector"
+                    />
+                <RadioButton
+                    android:id="@+id/moodAngry"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:button="@color/transparent"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_mood5_selector"
+                    />
+            </RadioGroup>
         </LinearLayout>
 
         <TextView
