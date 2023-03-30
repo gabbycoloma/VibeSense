@@ -8,6 +8,7 @@
     import android.view.ViewGroup
     import android.widget.RadioButton
     import android.widget.TextView
+    import androidx.appcompat.app.AppCompatActivity
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityLandingBinding
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentAddBinding
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
@@ -71,6 +72,8 @@
                 Log.d("Selected Mood", selectedMood.toString())
                 Log.d("Mood Name", moodName.toString())
                 Log.d("Description ", moodDescription!!)
+
+                replaceFragment(Home())
             }
         }
         private fun setMoodName() {
@@ -104,5 +107,12 @@
                         putString(ARG_PARAM2, param2)
                     }
                 }
+        }
+
+        private fun replaceFragment(fragment : Fragment){
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frame_layout,fragment)
+            fragmentTransaction.commit()
         }
     }
