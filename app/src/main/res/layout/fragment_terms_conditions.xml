@@ -32,7 +32,9 @@
             android:text="TERMS AND CONDITIONS"
             android:textColor="@color/white"
             android:textFontWeight="800"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="13dp" />
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
