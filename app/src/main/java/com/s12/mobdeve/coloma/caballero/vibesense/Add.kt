@@ -21,6 +21,8 @@
     private const val ARG_PARAM2 = "param2"
     private lateinit var binding: FragmentAddBinding
     private var selectedMood : Int? = null
+    private var moodName : String? = null
+    private var moodDescription : String? = null
     private var currentDate: String? = null
 
     /**
@@ -60,14 +62,28 @@
                 val selectedRadioButton: RadioButton = view.findViewById(i)
                 selectedMood = selectedRadioButton.text.toString().toIntOrNull()
                 Log.d("Selected Mood", selectedMood.toString())
-
             }
-            val moodDescription = binding.etDesc.text.toString()
+
 
             binding.btnPost.setOnClickListener{
+                moodDescription = binding.etDesc.text.toString()
+                setMoodName()
                 Log.d("Selected Mood", selectedMood.toString())
-                Log.d("Description ", moodDescription)
+                Log.d("Mood Name", moodName.toString())
+                Log.d("Description ", moodDescription!!)
             }
+        }
+        private fun setMoodName() {
+            if (selectedMood == 5) {
+                moodName = "happy"
+            }else if(selectedMood == 4)
+                moodName = "good"
+            else if(selectedMood == 3)
+                moodName = "neutral"
+            else if(selectedMood == 2)
+                moodName = "sad"
+            else if(selectedMood == 1)
+                moodName = "angry"
         }
 
         companion object {
