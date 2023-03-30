@@ -51,12 +51,12 @@ class Home : Fragment() {
 
         moodList = ArrayList()
 
-        moodList.add(Mood(R.drawable.mood1, "Good", "I am happy today", "March 23"))
-        moodList.add(Mood(R.drawable.mood5, "Angry", "I am angry today", "March 24"))
-        moodList.add(Mood(R.drawable.mood3, "Neutral", "It's okay today", "March 25"))
-        moodList.add(Mood(R.drawable.mood1, "Good", "Sinagot ako ni crush", "March 26"))
-        moodList.add(Mood(R.drawable.mood3, "Neutral", "Not much happened", "March 27"))
-        moodList.add(Mood(R.drawable.mood3, "Neutral", "Meh day as always", "March 28"))
+        moodList.add(Mood(R.drawable.mood1, "Good", "I am happy today", "March 23", 5))
+        moodList.add(Mood(R.drawable.mood5, "Angry", "I am angry today", "March 24", 1))
+        moodList.add(Mood(R.drawable.mood3, "Neutral", "It's okay today", "March 25", 3))
+        moodList.add(Mood(R.drawable.mood1, "Good", "Sinagot ako ni crush", "March 26", 5))
+        moodList.add(Mood(R.drawable.mood3, "Neutral", "Not much happened", "March 27", 3))
+        moodList.add(Mood(R.drawable.mood3, "Neutral", "Meh day as always", "March 28", 3))
 
         mainAdapter = MainAdapter(moodList)
         recyclerView.adapter = mainAdapter
