@@ -56,6 +56,7 @@
         android:orientation="vertical">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -78,6 +79,7 @@
             android:gravity="center"
             >
             <RadioGroup
+                android:id="@+id/rb_moods"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -87,6 +89,8 @@
                     android:layout_height="50dp"
                     android:button="@color/transparent"
                     android:layout_marginHorizontal="8dp"
+                    android:text="5"
+                    android:textColor="@color/transparent"
                     android:background="@drawable/custom_mood1_selector"
                     />
                 <RadioButton
@@ -95,6 +99,8 @@
                     android:layout_height="50dp"
                     android:button="@color/transparent"
                     android:layout_marginHorizontal="8dp"
+                    android:text="4"
+                    android:textColor="@color/transparent"
                     android:background="@drawable/custom_mood2_selector"
                     />
                 <RadioButton
@@ -103,6 +109,8 @@
                     android:layout_height="50dp"
                     android:button="@color/transparent"
                     android:layout_marginHorizontal="8dp"
+                    android:text="3"
+                    android:textColor="@color/transparent"
                     android:background="@drawable/custom_mood3_selector"
 
                     />
@@ -112,6 +120,8 @@
                     android:layout_height="50dp"
                     android:button="@color/transparent"
                     android:layout_marginHorizontal="8dp"
+                    android:text="2"
+                    android:textColor="@color/transparent"
                     android:background="@drawable/custom_mood4_selector"
                     />
                 <RadioButton
@@ -120,6 +130,8 @@
                     android:layout_height="50dp"
                     android:button="@color/transparent"
                     android:layout_marginHorizontal="8dp"
+                    android:text="1"
+                    android:textColor="@color/transparent"
                     android:background="@drawable/custom_mood5_selector"
                     />
             </RadioGroup>

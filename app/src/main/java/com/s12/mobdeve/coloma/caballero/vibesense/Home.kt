@@ -58,6 +58,8 @@ class Home : Fragment() {
         moodList.add(Mood(R.drawable.mood3, "Neutral", "Not much happened", "March 27", 3))
         moodList.add(Mood(R.drawable.mood3, "Neutral", "Meh day as always", "March 28", 3))
 
+
+
         mainAdapter = MainAdapter(moodList)
         recyclerView.adapter = mainAdapter
 
