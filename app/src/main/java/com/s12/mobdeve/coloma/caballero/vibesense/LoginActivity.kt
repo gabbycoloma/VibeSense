@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity() {
                             val goToHome = Intent(applicationContext, MainActivity::class.java)
                             startActivity(goToHome)
                         }else{
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }else{
-                    Toast.makeText(this, "Empty Fields are not allowed", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Empty Fields are not allowed", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -46,12 +46,5 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-    override fun onStart() {
-        super.onStart()
 
-        if(firebaseAuth.currentUser != null){
-            val goToHome = Intent(applicationContext, MainActivity::class.java)
-            startActivity(goToHome)
-        }
-    }
 }

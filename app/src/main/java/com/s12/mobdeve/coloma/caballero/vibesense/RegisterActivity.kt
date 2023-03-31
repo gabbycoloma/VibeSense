@@ -36,11 +36,11 @@ class RegisterActivity : AppCompatActivity() {
                         val goToLogin = Intent(applicationContext, LoginActivity::class.java)
                         startActivity(goToLogin)
                     }else{
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
             }else{
-                Toast.makeText(this, "Empty Fields are not allowed", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Empty Fields are not allowed", Toast.LENGTH_SHORT).show()
             }
         }
     }
