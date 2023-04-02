@@ -43,10 +43,10 @@
                 android:layout_width="236dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="14dp"
+                android:fontFamily="@font/inter"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/lato"
                 app:layout_constraintStart_toEndOf="@id/mood_emoji"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,6 +54,7 @@
                 android:id="@+id/mood_desc"
                 android:layout_width="236dp"
                 android:layout_height="43dp"
+                android:maxLines="2"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/lato"

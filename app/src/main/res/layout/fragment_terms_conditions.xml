@@ -32,7 +32,9 @@
             android:text="TERMS AND CONDITIONS"
             android:textColor="@color/white"
             android:textFontWeight="800"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="71dp"
+            tools:layout_editor_absoluteY="13dp" />
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
@@ -53,14 +55,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/termsandconditions"
-            android:fontFamily="@font/inter"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:justificationMode="inter_word"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:justificationMode="inter_word"
+                android:text="@string/termsandconditions"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

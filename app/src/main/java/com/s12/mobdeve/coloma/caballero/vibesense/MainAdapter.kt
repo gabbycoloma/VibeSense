@@ -23,6 +23,10 @@ class MainAdapter(private val Mood:ArrayList<Mood>)
         const val dateKey : String = "DATE_KEY"
     }
 
+
+    interface OnAddItemListener {
+        fun onAddItem(mood: Mood)
+    }
     class ViewHolder(moodView: View) : RecyclerView.ViewHolder(moodView){
         val moodEmoji : ImageView = moodView.findViewById(R.id.mood_emoji)
         val moodName : TextView = moodView.findViewById(R.id.mood_name)

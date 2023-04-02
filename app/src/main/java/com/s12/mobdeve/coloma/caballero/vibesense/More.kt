@@ -67,12 +67,12 @@ class More : Fragment() {
             Toast.makeText(this.context, "Successfully Logout", Toast.LENGTH_SHORT)
         }
     }
-    private fun replaceFragment(fragment : Fragment){
-        val fragmentManager = requireActivity().supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
-        fragmentTransaction.commit()
-    }
+        private fun replaceFragment(fragment : Fragment){
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frame_layout,fragment)
+            fragmentTransaction.commit()
+        }
 
     companion object {
         /**
