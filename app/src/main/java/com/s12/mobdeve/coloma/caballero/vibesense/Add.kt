@@ -1,5 +1,4 @@
     package com.s12.mobdeve.coloma.caballero.vibesense
-
     import android.os.Bundle
     import android.util.Log
     import androidx.fragment.app.Fragment
@@ -7,12 +6,11 @@
     import android.view.View
     import android.view.ViewGroup
     import android.widget.RadioButton
-    import android.widget.TextView
-    import androidx.appcompat.app.AppCompatActivity
-    import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityLandingBinding
+    import android.widget.Toast
+    import com.google.firebase.auth.FirebaseAuth
+    import com.google.firebase.auth.FirebaseUser
+    import com.google.firebase.database.*
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentAddBinding
-    import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
-    import org.w3c.dom.Text
     import java.text.SimpleDateFormat
     import java.util.*
 
@@ -25,7 +23,9 @@
     private var moodName : String? = null
     private var moodDescription : String? = null
     private var currentDate: String? = null
-
+    private var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://vibesense-9523f-default-rtdb.asia-southeast1.firebasedatabase.app")
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var currentUser: User? = null
     /**
      * A simple [Fragment] subclass.
      * Use the [Add.newInstance] factory method to
@@ -55,9 +55,15 @@
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
+            firebaseAuth = FirebaseAuth.getInstance()
+
+            val firebaseUser = firebaseAuth.currentUser
+            val emailCheck = firebaseUser?.email
+            Log.d("Current user email", emailCheck.toString())
 
             currentDate = SimpleDateFormat("MMMM d, yyyy").format(Date())
             binding.moodDate.text = currentDate
+            val id = databaseReference.push().key
 
             binding.rbMoods.setOnCheckedChangeListener { radioGroup, i ->
                 val selectedRadioButton: RadioButton = view.findViewById(i)
@@ -65,28 +71,73 @@
                 Log.d("Selected Mood", selectedMood.toString())
             }
 
-
+            moodDescription = binding.etDesc.text.toString()
             binding.btnPost.setOnClickListener{
-                moodDescription = binding.etDesc.text.toString()
-                setMoodName()
-                Log.d("Selected Mood", selectedMood.toString())
-                Log.d("Mood Name", moodName.toString())
-                Log.d("Description ", moodDescription!!)
+                if (selectedMood == null) {
+                    Toast.makeText(requireContext(), "Please select a mood.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                } else if(moodDescription == null){
+                    Toast.makeText(requireContext(), "Please enter a description.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                replaceFragment(Home())
+                getMoodName()
+                val id = databaseReference.push().key
+                Log.d("Current user email", emailCheck.toString())
+                if (emailCheck == null) {
+                    Toast.makeText(requireContext(), "User not logged in.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                getUserIdFromEmail(emailCheck) { userId ->
+                    if (userId != null) {
+                        databaseReference.child("Moods").child(id.toString()).child("emoji").setValue(getMoodName())
+                        databaseReference.child("Moods").child(id.toString()).child("name").setValue(getMoodName())
+                        databaseReference.child("Moods").child(id.toString()).child("description").setValue(binding.etDesc.text.toString())
+                        databaseReference.child("Moods").child(id.toString()).child("date").setValue(currentDate)
+                        databaseReference.child("Moods").child(id.toString()).child("rate").setValue(selectedMood)
+                        databaseReference.child("Moods").child(id.toString()).child("userID").setValue(userId)
+                        Toast.makeText(requireContext(), "Mood entry added!", Toast.LENGTH_SHORT).show()
+                        replaceFragment(Home())
+
+                    } else {
+                        Toast.makeText(requireContext(), "User not found.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
+
         }
-        private fun setMoodName() {
-            if (selectedMood == 5) {
-                moodName = "happy"
-            }else if(selectedMood == 4)
-                moodName = "good"
-            else if(selectedMood == 3)
-                moodName = "neutral"
-            else if(selectedMood == 2)
-                moodName = "sad"
-            else if(selectedMood == 1)
-                moodName = "angry"
+        private fun getUserIdFromEmail(email: String, callback: (String?) -> Unit) {
+            val userReference = databaseReference.child("Users")
+            userReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (userSnapshot in snapshot.children) {
+                            val user = userSnapshot.getValue(User::class.java)
+                            val userId = userSnapshot.key
+                            callback(userId)
+                            return
+                        }
+                    }
+                    callback(null)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    callback(null)
+                }
+            })
+        }
+
+        private fun getMoodName(): String {
+            when (selectedMood) {
+                5 -> moodName = "happy"
+                4 -> moodName = "good"
+                3 -> moodName = "neutral"
+                2 -> moodName = "sad"
+                1 -> moodName = "angry"
+            }
+
+            return moodName.toString()
         }
 
         companion object {
