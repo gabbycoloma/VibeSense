@@ -30,7 +30,7 @@
             android:fontFamily="@font/lato"
             android:textColor="@color/white"
             android:textFontWeight="800"
-            android:textSize="20sp"
+            android:textSize="24sp"
             tools:layout_editor_absoluteX="71dp"
             tools:layout_editor_absoluteY="13dp"
                 />
@@ -166,7 +166,7 @@
                     android:layout_height="250dp"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato"
-                    android:gravity="center"
+                    android:gravity="top|center"
                     android:inputType="text|textMultiLine"
                     android:maxLines="10"
                     android:textColor="@color/black" />

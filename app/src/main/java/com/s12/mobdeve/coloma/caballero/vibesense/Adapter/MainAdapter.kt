@@ -47,7 +47,7 @@ class MainAdapter
         val mood = moodList[position]
         holder.moodName.text = mood.name
         holder.moodDesc.text = mood.description
-        holder.moodDate.text = mood.date
+        holder.moodDate.text = mood.date.toString()
         when {
             mood.name.equals("happy", true) -> {
                 holder.moodEmoji.setImageResource(R.drawable.mood1)
@@ -71,7 +71,7 @@ class MainAdapter
 
             args.putString(nameKey, mood.name)
             args.putString(descriptionKey, mood.description)
-            args.putString(dateKey, mood.date)
+            args.putString(dateKey, mood.date.toString())
 
             val fragment = ViewMood()
             fragment.arguments = args

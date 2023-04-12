@@ -76,7 +76,14 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+        fun onStart() {
+            super.onStart()
 
+            if(firebaseAuth.currentUser != null){
+                val goToHome = Intent(applicationContext, MainActivity::class.java)
+                startActivity(goToHome)
+            }
+        }
 
     }
 

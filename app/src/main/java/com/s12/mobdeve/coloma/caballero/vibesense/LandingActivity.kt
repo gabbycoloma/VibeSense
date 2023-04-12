@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityLandingBinding
 
 class LandingActivity : AppCompatActivity() {
     private lateinit var binding:ActivityLandingBinding
-
+    private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLandingBinding.inflate(layoutInflater)
@@ -25,4 +26,6 @@ class LandingActivity : AppCompatActivity() {
             startActivity(goToLogin)
         }
     }
+
+
 }

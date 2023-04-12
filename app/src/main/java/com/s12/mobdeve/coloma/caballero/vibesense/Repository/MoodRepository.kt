@@ -47,6 +47,7 @@ class MoodRepository {
         })
     }
 
+
     fun loadMoodByUserId(userID: String, moodList: MutableLiveData<List<Mood>>) {
         val query = databaseReference.orderByChild("userID").equalTo(userID)
         query.addValueEventListener(object: ValueEventListener{
