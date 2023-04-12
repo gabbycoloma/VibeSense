@@ -45,14 +45,14 @@ class MainAdapter(private val Mood:ArrayList<Mood>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mood = Mood[position]
-//        holder.moodEmoji.setImageResource(mood.emoji)
+        holder.moodEmoji.setImageResource(mood.emoji!!.toInt())
         holder.moodName.text = mood.name
         holder.moodDesc.text = mood.desc
         holder.moodDate.text = mood.date
 
         holder.itemView.setOnClickListener{
             val args = Bundle()
-//            args.putInt(emojiKey, mood.emoji)
+            args.putInt(emojiKey, mood.emoji!!.toInt())
             args.putString(nameKey, mood.name)
             args.putString(descriptionKey, mood.desc)
             args.putString(dateKey, mood.date)
