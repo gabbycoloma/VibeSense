@@ -1,12 +1,18 @@
 package com.s12.mobdeve.coloma.caballero.vibesense
 
+import MoodViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.s12.mobdeve.coloma.caballero.vibesense.Adapter.MainAdapter
+import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,6 +22,8 @@ private const val ARG_PARAM2 = "param2"
 private lateinit var recyclerView: RecyclerView
 private lateinit var mainAdapter: MainAdapter
 private lateinit var moodList : ArrayList<Mood> //for testing purposes
+private lateinit var viewModel: MoodViewModel
+
 
 /**
  * A simple [Fragment] subclass.
@@ -51,26 +59,16 @@ class Home : Fragment() {
 
         moodList = ArrayList()
 
-        //add moodDAO.getMood
-
-//        moodList.add(Mood(
-//            "Good",
-//            "Good",
-//            "I am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy today",
-//            "March 23",
-//            5,
-//            userId = userId
-//        ))
-//        moodList.add(Mood("Angry", "Angry", "I am angry today", "March 24", 1, userId = userId))
-//        moodList.add(Mood("Neutral", "Neutral", "It's okay today", "March 25", 3, userId = userId))
-//        moodList.add(Mood("Good", "Good", "Sinagot ako ni crush", "March 26", 5, userId = userId))
-//        moodList.add(Mood("Neutral", "Neutral", "Not much happened", "March 27", 3, userId = userId))
-//        moodList.add(Mood("Neutral", "Neutral", "Meh day as always", "March 28", 3, userId = userId))
 
 
-
-        mainAdapter = MainAdapter(moodList)
+        mainAdapter = MainAdapter()
         recyclerView.adapter = mainAdapter
+
+        viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
+
+        viewModel.allMoods.observe(viewLifecycleOwner, Observer {
+            mainAdapter.updateMoodList(it)
+        })
 
     }
 

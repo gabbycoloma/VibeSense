@@ -9,6 +9,8 @@
     import android.widget.Toast
     import com.google.firebase.auth.FirebaseAuth
     import com.google.firebase.database.*
+    import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
+    import com.s12.mobdeve.coloma.caballero.vibesense.Model.User
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentAddBinding
     import java.text.SimpleDateFormat
     import java.util.*

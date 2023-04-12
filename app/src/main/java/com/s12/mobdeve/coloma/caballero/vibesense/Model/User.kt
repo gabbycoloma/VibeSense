@@ -1,4 +1,4 @@
-package com.s12.mobdeve.coloma.caballero.vibesense
+package com.s12.mobdeve.coloma.caballero.vibesense.Model
 
 class User(
     val id: String? = null,

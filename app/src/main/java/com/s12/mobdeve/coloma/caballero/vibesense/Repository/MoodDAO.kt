@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
+import com.s12.mobdeve.coloma.caballero.vibesense.Model.User
 
 
 interface MoodDAO {
@@ -19,12 +21,13 @@ class MoodDAOFireBaseImplementation(var context: Context): MoodDAO {
     private lateinit var firebaseAuth: FirebaseAuth
     private var currentUser: User? = null
 
+
+
     override fun addMood(mood: Mood) {
-        databaseReference.child("Moods").child(mood.userID.toString()).child("emoji").setValue(mood.name)
+        databaseReference.child("Moods").child(mood.userID.toString()).child("emoji").setValue(mood.emoji)
         databaseReference.child("Moods").child(mood.userID.toString()).child("name").setValue(mood.name)
-        databaseReference.child("Moods").child(mood.userID.toString()).child("description").setValue(mood.desc)
+        databaseReference.child("Moods").child(mood.userID.toString()).child("description").setValue(mood.description)
         databaseReference.child("Moods").child(mood.userID.toString()).child("date").setValue(mood.date)
-        databaseReference.child("Moods").child(mood.userID.toString()).child("emoji").setValue(mood.name)
         databaseReference.child("Moods").child(mood.userID.toString()).child("userID").setValue(mood.userID)
     }
 

@@ -39,7 +39,7 @@ class ViewMood : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            emoji = it.getInt(emojiKey) // Get the Int value
+//            emoji = it.getInt(emojiKey) // Get the Int value
             name = it.getString(nameKey)
             description = it.getString(descriptionKey)
             date = it.getString(dateKey)
@@ -63,8 +63,24 @@ class ViewMood : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set the emoji, name, description, and date in the UI
-        binding.moodEmoji.setImageResource(emoji!!) // Convert the Int value to an Int resource ID
+        when {
+            name.equals("happy", true) -> {
+                binding.moodEmoji.setImageResource(R.drawable.mood1)
+            }
+            name.equals("good", true) -> {
+                binding.moodEmoji.setImageResource(R.drawable.mood2)
+            }
+            name.equals("neutral", true) -> {
+                binding.moodEmoji.setImageResource(R.drawable.mood3)
+            }
+            name.equals("sad", true) -> {
+                binding.moodEmoji.setImageResource(R.drawable.mood4)
+            }
+            name.equals("angry", true) -> {
+                binding.moodEmoji.setImageResource(R.drawable.mood5)
+            }
+        }
+
         binding.moodName.text = name
         binding.moodDesc.text = description
         binding.moodDate.text = date

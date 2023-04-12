@@ -12,11 +12,9 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import androidx.lifecycle.lifecycleScope
-import com.s12.mobdeve.coloma.caballero.vibesense.Quote
-import com.s12.mobdeve.coloma.caballero.vibesense.ZenQuotesService
-import kotlinx.coroutines.Dispatchers
+import com.s12.mobdeve.coloma.caballero.vibesense.Model.Quote
+import com.s12.mobdeve.coloma.caballero.vibesense.Utility.ZenQuotesService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
