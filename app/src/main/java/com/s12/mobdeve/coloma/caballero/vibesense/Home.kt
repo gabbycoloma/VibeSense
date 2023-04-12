@@ -51,12 +51,21 @@ class Home : Fragment() {
 
         moodList = ArrayList()
 
-        moodList.add(Mood("Good", "Good", "I am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy today", "March 23", 5))
-        moodList.add(Mood("Angry", "Angry", "I am angry today", "March 24", 1))
-        moodList.add(Mood("Neutral", "Neutral", "It's okay today", "March 25", 3))
-        moodList.add(Mood("Good", "Good", "Sinagot ako ni crush", "March 26", 5))
-        moodList.add(Mood("Neutral", "Neutral", "Not much happened", "March 27", 3))
-        moodList.add(Mood("Neutral", "Neutral", "Meh day as always", "March 28", 3))
+        //add moodDAO.getMood
+
+//        moodList.add(Mood(
+//            "Good",
+//            "Good",
+//            "I am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy todayI am happy today",
+//            "March 23",
+//            5,
+//            userId = userId
+//        ))
+//        moodList.add(Mood("Angry", "Angry", "I am angry today", "March 24", 1, userId = userId))
+//        moodList.add(Mood("Neutral", "Neutral", "It's okay today", "March 25", 3, userId = userId))
+//        moodList.add(Mood("Good", "Good", "Sinagot ako ni crush", "March 26", 5, userId = userId))
+//        moodList.add(Mood("Neutral", "Neutral", "Not much happened", "March 27", 3, userId = userId))
+//        moodList.add(Mood("Neutral", "Neutral", "Meh day as always", "March 28", 3, userId = userId))
 
 
 

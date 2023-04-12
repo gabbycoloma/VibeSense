@@ -8,7 +8,6 @@
     import android.widget.RadioButton
     import android.widget.Toast
     import com.google.firebase.auth.FirebaseAuth
-    import com.google.firebase.auth.FirebaseUser
     import com.google.firebase.database.*
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentAddBinding
     import java.text.SimpleDateFormat
@@ -26,11 +25,7 @@
     private var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://vibesense-9523f-default-rtdb.asia-southeast1.firebasedatabase.app")
     private lateinit var firebaseAuth: FirebaseAuth
     private var currentUser: User? = null
-    /**
-     * A simple [Fragment] subclass.
-     * Use the [Add.newInstance] factory method to
-     * create an instance of this fragment.
-     */
+
     class Add : Fragment() {
         // TODO: Rename and change types of parameters
         private var param1: String? = null
@@ -56,6 +51,8 @@
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             firebaseAuth = FirebaseAuth.getInstance()
+
+            val moodDAO = MoodDAOFireBaseImplementation(this.requireContext())
 
             val firebaseUser = firebaseAuth.currentUser
             val emailCheck = firebaseUser?.email
@@ -91,12 +88,9 @@
 
                 getUserIdFromEmail(emailCheck) { userId ->
                     if (userId != null) {
-                        databaseReference.child("Moods").child(id.toString()).child("emoji").setValue(getMoodName())
-                        databaseReference.child("Moods").child(id.toString()).child("name").setValue(getMoodName())
-                        databaseReference.child("Moods").child(id.toString()).child("description").setValue(binding.etDesc.text.toString())
-                        databaseReference.child("Moods").child(id.toString()).child("date").setValue(currentDate)
-                        databaseReference.child("Moods").child(id.toString()).child("rate").setValue(selectedMood)
-                        databaseReference.child("Moods").child(id.toString()).child("userID").setValue(userId)
+                        var moodToAdd = Mood(id, getMoodName(), getMoodName(), binding.etDesc.text.toString(), currentDate.toString(), selectedMood, userId.toString())
+                        moodDAO.addMood(moodToAdd)
+
                         Toast.makeText(requireContext(), "Mood entry added!", Toast.LENGTH_SHORT).show()
                         replaceFragment(Home())
 
