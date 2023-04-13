@@ -42,6 +42,8 @@ class Home : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var myCalendar: Calendar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,8 +77,10 @@ class Home : Fragment() {
         val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayofMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
-            myCalendar.set(Calendar.DAY_OF_YEAR, dayofMonth)
-            updateLable(myCalendar)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
+            updateLabel(myCalendar)
+
+            updateLabel(myCalendar)
         }
 
         btnDate.setOnClickListener{
@@ -99,8 +103,8 @@ class Home : Fragment() {
 
     }
 
-    private fun updateLable(myCalendar: Calendar) {
-        val myFormat = "MM-yyyy"
+    private fun updateLabel(myCalendar: Calendar) {
+        val myFormat = "yyyy-MM-dd"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
 
 
