@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.s12.mobdeve.coloma.caballero.vibesense.Adapter.MainAdapter
 import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
-import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityMainBinding
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentHomeBinding
-import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
+
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -31,7 +30,7 @@ private lateinit var recyclerView: RecyclerView
 private lateinit var mainAdapter: MainAdapter
 private lateinit var moodList : ArrayList<Mood> //for testing purposes
 private lateinit var viewModel: MoodViewModel
-
+private lateinit var binding: FragmentHomeBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -39,13 +38,14 @@ private lateinit var viewModel: MoodViewModel
  * create an instance of this fragment.
  */
 class Home : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var btnDatePicker: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -56,6 +56,7 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -65,7 +66,7 @@ class Home : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-
+        binding = FragmentHomeBinding.bind(view)
         val btnDatePicker = binding.btnDate
 
         val myCalendar = Calendar.getInstance()
