@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/lato"
-                android:text="March 20"
+                android:text="Analytics"
                 android:textColor="@color/white"
                 android:textFontWeight="800"
                 android:textSize="28sp" />
@@ -68,7 +68,7 @@
                 android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="1"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@id/mood_emoji5"
                 app:layout_constraintStart_toStartOf="@id/mood_emoji5"
                 app:layout_constraintEnd_toEndOf="@id/mood_emoji5"/>
@@ -89,7 +89,7 @@
                 android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="3"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@id/mood_emoji4"
                 app:layout_constraintStart_toStartOf="@id/mood_emoji4"
                 app:layout_constraintEnd_toEndOf="@id/mood_emoji4"/>
@@ -110,7 +110,7 @@
                 android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="5"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@id/mood_emoji3"
                 app:layout_constraintStart_toStartOf="@id/mood_emoji3"
                 app:layout_constraintEnd_toEndOf="@id/mood_emoji3"/>
@@ -131,7 +131,7 @@
                 android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="7"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@id/mood_emoji2"
                 app:layout_constraintStart_toStartOf="@id/mood_emoji2"
                 app:layout_constraintEnd_toEndOf="@id/mood_emoji2"/>
@@ -151,7 +151,7 @@
                 android:fontFamily="@font/lato"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="15"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@id/mood_emoji1"
                 app:layout_constraintStart_toStartOf="@id/mood_emoji1"
                 app:layout_constraintEnd_toEndOf="@id/mood_emoji1"/>
@@ -159,16 +159,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/chart"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emoji_layout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

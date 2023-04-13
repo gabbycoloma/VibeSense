@@ -1,5 +1,6 @@
 package com.s12.mobdeve.coloma.caballero.vibesense
 
+import Home
 import Quotes
 import android.os.Bundle
 import android.os.Handler

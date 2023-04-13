@@ -1,5 +1,3 @@
-package com.s12.mobdeve.coloma.caballero.vibesense
-
 import MoodViewModel
 import android.app.DatePickerDialog
 import android.os.Build
@@ -9,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,26 +26,18 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 private lateinit var recyclerView: RecyclerView
 private lateinit var mainAdapter: MainAdapter
-private lateinit var moodList : ArrayList<Mood> //for testing purposes
+private lateinit var moodList : ArrayList<Mood>
 private lateinit var viewModel: MoodViewModel
 private lateinit var binding: FragmentHomeBinding
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Home.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Home : Fragment() {
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var myCalendar: Calendar
@@ -62,38 +56,38 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = view.findViewById(R.id.recyclerView)
+
+        recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        binding = FragmentHomeBinding.bind(view)
-        val btnDate: Button
-        btnDate = binding.btnDate
+
+        val txtDate: TextView = binding.txtDate
+        val btnFilter: ImageView = binding.btnFilter
+        val llFilter: LinearLayoutCompat = binding.llFilter
 
         moodList = ArrayList()
         mainAdapter = MainAdapter()
         recyclerView.adapter = mainAdapter
 
         val myCalendar = Calendar.getInstance()
+        updateLabel(myCalendar)
 
-
-
-        val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayofMonth ->
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
-            updateLabel(myCalendar)
-
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel(myCalendar)
 
             val monthHandle = myCalendar.get(Calendar.MONTH)
             val yearHandle = myCalendar.get(Calendar.YEAR)
+
             viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
 
             viewModel.allMoods.observe(viewLifecycleOwner, Observer {
@@ -101,16 +95,23 @@ class Home : Fragment() {
             })
         }
 
-        btnDate.setOnClickListener{
-            DatePickerDialog(this.requireContext(), datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        llFilter.setOnClickListener{
+            DatePickerDialog(
+                requireContext(),
+                datePicker,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
     }
 
+
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        binding.btnDate.text = sdf.format(myCalendar.time)
+        binding.txtDate.text = sdf.format(myCalendar.time)
     }
 
     companion object {

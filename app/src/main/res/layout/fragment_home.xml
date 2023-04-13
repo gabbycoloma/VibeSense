@@ -22,30 +22,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <Button
-            android:id="@+id/btnDate"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:layout_gravity="center"
-            />
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="March 2023"-->
-<!--            android:fontFamily="@font/lato"-->
-<!--            android:textFontWeight="800"-->
-<!--            android:textSize="24sp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:id="@+id/toolbar_title" />-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/baseline_arrow_drop_down_24"-->
-<!--            android:fontFamily="@font/lato"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:id="@+id/btn_filter" />-->
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:textFontWeight="800"
+                android:textSize="24sp"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_drop_down_24"
+                android:fontFamily="@font/lato"
+                android:layout_gravity="center"
+                android:id="@+id/btn_filter" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
