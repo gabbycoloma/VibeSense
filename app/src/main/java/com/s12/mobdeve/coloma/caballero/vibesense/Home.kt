@@ -2,12 +2,14 @@ package com.s12.mobdeve.coloma.caballero.vibesense
 
 import MoodViewModel
 import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
 import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentHomeBinding
 
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,6 +34,7 @@ private lateinit var mainAdapter: MainAdapter
 private lateinit var moodList : ArrayList<Mood> //for testing purposes
 private lateinit var viewModel: MoodViewModel
 private lateinit var binding: FragmentHomeBinding
+
 
 /**
  * A simple [Fragment] subclass.
@@ -62,6 +66,7 @@ class Home : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -71,8 +76,13 @@ class Home : Fragment() {
         val btnDate: Button
         btnDate = binding.btnDate
 
+        moodList = ArrayList()
+        mainAdapter = MainAdapter()
+        recyclerView.adapter = mainAdapter
 
         val myCalendar = Calendar.getInstance()
+
+
 
         val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayofMonth ->
             myCalendar.set(Calendar.YEAR, year)
@@ -81,25 +91,19 @@ class Home : Fragment() {
             updateLabel(myCalendar)
 
             updateLabel(myCalendar)
+
+            val monthHandle = myCalendar.get(Calendar.MONTH)
+            val yearHandle = myCalendar.get(Calendar.YEAR)
+            viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
+
+            viewModel.allMoods.observe(viewLifecycleOwner, Observer {
+                mainAdapter.updateMoodList(monthHandle, yearHandle, it)
+            })
         }
 
         btnDate.setOnClickListener{
             DatePickerDialog(this.requireContext(), datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show()
         }
-
-
-        moodList = ArrayList()
-
-
-
-        mainAdapter = MainAdapter()
-        recyclerView.adapter = mainAdapter
-
-        viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
-
-        viewModel.allMoods.observe(viewLifecycleOwner, Observer {
-            mainAdapter.updateMoodList(it)
-        })
 
     }
 

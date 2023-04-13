@@ -1,6 +1,7 @@
 package com.s12.mobdeve.coloma.caballero.vibesense.Adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
 import com.s12.mobdeve.coloma.caballero.vibesense.R
 import com.s12.mobdeve.coloma.caballero.vibesense.ViewMood
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainAdapter
     : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
@@ -37,9 +41,24 @@ class MainAdapter
         return moodList.size
     }
 
-    fun updateMoodList(moodList: List<Mood>){
+    fun updateMoodList(month: Int, year: Int, moodList: List<Mood>){
         this.moodList.clear()
-        this.moodList.addAll(moodList)
+        for (mood in moodList){
+            val dateString = mood.date
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date = dateFormat.parse(dateString)
+            Log.d("Adapter", month.toString())
+            Log.d("Adapter", year.toString())
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+            val monthInt = calendar.get(Calendar.MONTH)
+            val yearInt = calendar.get(Calendar.YEAR)
+
+            if(month == monthInt && year == yearInt){
+                Log.d("IF STATEMENT", "hello")
+                this.moodList.add(mood)
+            }
+        }
         notifyDataSetChanged()
     }
 
