@@ -104,11 +104,9 @@ class Home : Fragment() {
     }
 
     private fun updateLabel(myCalendar: Calendar) {
-        val myFormat = "yyyy-MM-dd"
+        val myFormat = "MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-
-
-        binding.btnDate.setText(sdf.format(myCalendar.time))
+        binding.btnDate.text = sdf.format(myCalendar.time)
     }
 
     companion object {
