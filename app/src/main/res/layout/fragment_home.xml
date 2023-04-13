@@ -21,23 +21,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
-        <TextView
+
+        <Button
+            android:id="@+id/btnDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="March 2023"
-            android:fontFamily="@font/lato"
-            android:textFontWeight="800"
-            android:textSize="24sp"
+            android:text="Date"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:id="@+id/toolbar_title" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_drop_down_24"
-            android:fontFamily="@font/lato"
-            android:layout_gravity="center"
-            android:id="@+id/btn_filter" />
+            />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="March 2023"-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:textFontWeight="800"-->
+<!--            android:textSize="24sp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:id="@+id/toolbar_title" />-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/baseline_arrow_drop_down_24"-->
+<!--            android:fontFamily="@font/lato"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:id="@+id/btn_filter" />-->
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,17 +1,25 @@
 package com.s12.mobdeve.coloma.caballero.vibesense
 
 import MoodViewModel
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.s12.mobdeve.coloma.caballero.vibesense.Adapter.MainAdapter
 import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.ActivityMainBinding
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentHomeBinding
+import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentQuotesBinding
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,10 +39,11 @@ private lateinit var viewModel: MoodViewModel
  * create an instance of this fragment.
  */
 class Home : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var btnDatePicker: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -57,6 +66,22 @@ class Home : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        val btnDatePicker = binding.btnDate
+
+        val myCalendar = Calendar.getInstance()
+
+        val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayofMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_YEAR, dayofMonth)
+            updateLable(myCalendar)
+        }
+
+        btnDatePicker.setOnClickListener{
+            DatePickerDialog(this.requireContext(), datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+
         moodList = ArrayList()
 
 
@@ -70,6 +95,12 @@ class Home : Fragment() {
             mainAdapter.updateMoodList(it)
         })
 
+    }
+
+    private fun updateLable(myCalendar: Calendar) {
+        val myFormat = "MM-yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+        btnDatePicker.setText(sdf.format(myCalendar.time))
     }
 
     companion object {
