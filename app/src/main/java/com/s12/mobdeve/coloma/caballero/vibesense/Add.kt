@@ -1,4 +1,5 @@
     package com.s12.mobdeve.coloma.caballero.vibesense
+    import android.os.Build
     import android.os.Bundle
     import android.util.Log
     import androidx.fragment.app.Fragment
@@ -7,12 +8,15 @@
     import android.view.ViewGroup
     import android.widget.RadioButton
     import android.widget.Toast
+    import androidx.annotation.RequiresApi
     import com.google.firebase.auth.FirebaseAuth
     import com.google.firebase.database.*
     import com.s12.mobdeve.coloma.caballero.vibesense.Model.Mood
     import com.s12.mobdeve.coloma.caballero.vibesense.Model.User
     import com.s12.mobdeve.coloma.caballero.vibesense.databinding.FragmentAddBinding
     import java.text.SimpleDateFormat
+    import java.time.LocalDate
+    import java.time.format.DateTimeFormatter
     import java.util.*
 
     // TODO: Rename parameter arguments, choose names that match
@@ -23,7 +27,7 @@
     private var selectedMood : Int? = null
     private var moodName : String? = null
     private var moodDescription : String? = null
-    private var currentDate: String? = null
+    private var currentDate: Date? = null
     private var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://vibesense-9523f-default-rtdb.asia-southeast1.firebasedatabase.app")
     private lateinit var firebaseAuth: FirebaseAuth
     private var currentUser: User? = null
@@ -50,6 +54,7 @@
             return binding.root
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             firebaseAuth = FirebaseAuth.getInstance()
@@ -60,8 +65,10 @@
             val emailCheck = firebaseUser?.email
             Log.d("Current user email", emailCheck.toString())
 
-            currentDate = SimpleDateFormat("MMMM d, yyyy").format(Date())
-            binding.moodDate.text = currentDate
+            val currentDate = LocalDate.now()
+            val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+            binding.moodDate.text = currentDate.format(formatter)
+
             val id = databaseReference.push().key
 
             binding.rbMoods.setOnCheckedChangeListener { radioGroup, i ->

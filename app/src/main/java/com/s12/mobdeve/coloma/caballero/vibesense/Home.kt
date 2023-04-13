@@ -42,7 +42,6 @@ class Home : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var btnDatePicker: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,7 +66,9 @@ class Home : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
         binding = FragmentHomeBinding.bind(view)
-        val btnDatePicker = binding.btnDate
+        val btnDate: Button
+        btnDate = binding.btnDate
+
 
         val myCalendar = Calendar.getInstance()
 
@@ -78,7 +79,7 @@ class Home : Fragment() {
             updateLable(myCalendar)
         }
 
-        btnDatePicker.setOnClickListener{
+        btnDate.setOnClickListener{
             DatePickerDialog(this.requireContext(), datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show()
         }
 
@@ -101,7 +102,9 @@ class Home : Fragment() {
     private fun updateLable(myCalendar: Calendar) {
         val myFormat = "MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        btnDatePicker.setText(sdf.format(myCalendar.time))
+
+
+        binding.btnDate.setText(sdf.format(myCalendar.time))
     }
 
     companion object {
