@@ -26,8 +26,6 @@ class LoginActivity : AppCompatActivity() {
             val goToRegister = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(goToRegister)
         }
-        binding.btnLogin.setOnClickListener {
-
 
             binding.btnLogin.setOnClickListener{
                 val email = binding.etEmail.text.toString()
@@ -75,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-        }
+
         fun onStart() {
             super.onStart()
 

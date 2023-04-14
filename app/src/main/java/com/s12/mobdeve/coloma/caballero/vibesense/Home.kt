@@ -55,15 +55,7 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -76,6 +68,16 @@ class Home : Fragment() {
         mainAdapter = MainAdapter()
         recyclerView.adapter = mainAdapter
 
+        // Get current month and year
+        val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+
+        // Display data for current month and year
+        viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
+        viewModel.allMoods.observe(viewLifecycleOwner, Observer {
+            mainAdapter.updateMoodList(currentMonth, currentYear, it)
+        })
+
         val myCalendar = Calendar.getInstance()
         updateLabel(myCalendar)
 
@@ -87,8 +89,6 @@ class Home : Fragment() {
 
             val monthHandle = myCalendar.get(Calendar.MONTH)
             val yearHandle = myCalendar.get(Calendar.YEAR)
-
-            viewModel = ViewModelProvider(this).get(MoodViewModel::class.java)
 
             viewModel.allMoods.observe(viewLifecycleOwner, Observer {
                 mainAdapter.updateMoodList(monthHandle, yearHandle, it)
@@ -105,6 +105,7 @@ class Home : Fragment() {
             ).show()
         }
 
+        return binding.root
     }
 
 
