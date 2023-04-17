@@ -50,12 +50,14 @@ class Analytics : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val moodCounts = ArrayList<Int>()
         firebaseAuth = FirebaseAuth.getInstance()
         moodDAO = MoodDAOFireBaseImplementation(requireActivity())
 
         val firebaseUser = firebaseAuth.currentUser
         val emailCheck = firebaseUser?.email
         Log.d("Current user email", emailCheck.toString())
+
 
         getUserIdFromEmail(emailCheck.toString()) {  userID->
             // Here, you can use the userId returned by the callback function
@@ -69,6 +71,39 @@ class Analytics : Fragment() {
                                 binding.mood3Count.text = neutralCount.toString()
                                 binding.mood2Count.text = sadCount.toString()
                                 binding.mood1Count.text = angryCount.toString()
+                                var happyCount: String? = binding.mood5Count.text.toString()
+                                var goodCount: String? = binding.mood5Count.text.toString()
+                                var neutralCount: String? = binding.mood5Count.text.toString()
+                                var sadCount: String? = binding.mood5Count.text.toString()
+                                var angryCount: String? = binding.mood5Count.text.toString()
+
+                                val moodCounts = mapOf(
+                                    "happy" to happyCount!!.toInt(),
+                                    "good" to goodCount!!.toInt(),
+                                    "neutral" to neutralCount!!.toInt(),
+                                    "sad" to sadCount!!.toInt(),
+                                    "angry" to angryCount!!.toInt()
+                                )
+
+                                val topMoodName = moodCounts.maxByOrNull { it.value }?.key
+                                binding.tvtopMoodName.text = topMoodName
+                                when {
+                                    topMoodName.equals("happy", true) -> {
+                                        binding.ivTopMood.setImageResource(R.drawable.mood1)
+                                    }
+                                    topMoodName.equals("good", true) -> {
+                                        binding.ivTopMood.setImageResource(R.drawable.mood2)
+                                    }
+                                    topMoodName.equals("neutral", true) -> {
+                                        binding.ivTopMood.setImageResource(R.drawable.mood3)
+                                    }
+                                    topMoodName.equals("sad", true) -> {
+                                        binding.ivTopMood.setImageResource(R.drawable.mood4)
+                                    }
+                                    topMoodName.equals("angry", true) -> {
+                                        binding.ivTopMood.setImageResource(R.drawable.mood5)
+                                    }
+                                }
                             }
                         }
                     }
